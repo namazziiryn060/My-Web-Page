@@ -1,0 +1,33 @@
+/* ---- LAUNCH AN EC2 INSTANCE ---- */
+
+aws ec2 run-instances --image- id ami-xxxxxxxx --count 1 --instance type tc2.micro --key-name <<MykeyPair>> --security-group-ids sg-xxxxxxxx --subnet-id subnet-xxxxxxx
+
+
+/* ---- ADD NAME TAG TO YOUR EC2 INSTANCE ---- */
+
+aws ec2 create-tags --resource i-xxxxxxxx --tags Key=<<tag name>>,Value=<<ISTANCE NAME>>
+
+/* ---- LISTING ALL INSTANCES FOR AN INSTANCE TYPE ---- */
+
+aws ec2 describe-instances --filters "Name=instance-type,Value=<<type name>>" --queryReservations[].InstanceId
+
+/* ---- LIST ALL INSTANCES LAUNCHED WITH A SPECIFIC AMI ----*/
+
+aws ec2 describe-instance --filters
+"Name=image-id,Value=<<ami-xxxxxxxx.ami-yyyyyyy,ami-zzzzzzz>>" --query Reservations[]
+
+/* ---- LIST ALL INSTANCES WITH A SPECIFIC TAG ---- */
+
+aws ec2 describe-instances --filters "Name=tag:<<TAG NAME>>,Value=<<INSTANCE NAME>>"
+
+/* ---- STOP EC2 INSTANCES ---- */
+
+aws ec2 stop-instances --instance-ids i-xxxxxxxx
+
+/* ---- START EC2 INSTANCES ---- */
+
+aws ec2 start-instances --instance-ids i-xxxxxxxx
+
+/* ----TERMINATING YOUR INSTANCE ---- */
+
+aws ec2 terminate-instances --instance-ids i-xxxxxxxx
